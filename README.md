@@ -14,7 +14,6 @@ In this version, I kept the core MINJA implementation for the RAP and QA setting
 - Included the RAP-agent implementation that runs against a locally installed WebShop environment.
 - Included the QA-agent implementation over MMLU-style CSV data.
 - Added a fast guardrail notebook that evaluates a defense before writing new records into memory.
-- Updated Git ignore rules so API keys, generated memories, logs, outputs, and the external WebShop folder are not pushed.
 
 ## Setup
 
@@ -41,7 +40,6 @@ pip install openai numpy python-Levenshtein
 Create API-key files locally only.
 
 ```text
-QA/OpenAI_api_key.txt
 rap/NVIDIA_api_key.txt
 ```
 
@@ -71,20 +69,6 @@ Predefined victim-target pairs are stored in:
 ```text
 rap/victim_target_pair/victim_target.json
 ```
-
-## Running the QA Agent
-
-```bash
-cd QA
-python main.py \
-  --data_path data/test/high_school_chemistry_test.csv \
-  --core_model gpt-4o \
-  --n_shots 3 \
-  --seed 42 \
-  --memory_path memory.json
-```
-
-The QA run generates local memory and result files such as `memory.json`, `memory_test.json`, `question_*.json`, and log files. These are ignored by Git because they are experiment artifacts.
 
 ## Running the Guardrail Notebook
 
