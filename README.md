@@ -8,20 +8,6 @@ In this version, I kept the core MINJA implementation for the RAP and QA setting
   <img src="figure/MINJA.png" width="800">
 </p>
 
-## Repository Structure
-
-```text
-MINJA/
-|-- QA/                         # QA-agent memory injection experiment
-|-- rap/                        # RAP-agent implementation for WebShop-style tasks
-|-- figure/                     # Project figure used in this README
-|-- MINJA_GUARDRAIL_FAST.ipynb  # Guardrail defense notebook for QA experiments
-|-- .gitignore                  # Keeps API keys, outputs, logs, and WebShop out of Git
-`-- README.md
-```
-
-The full `WebShop/` environment is intentionally not included in this GitHub repository. It is a large external dependency/dataset environment, so this repo only keeps the RAP code and prompt/config files needed to connect to WebShop after you set it up locally.
-
 ## What Was Implemented
 
 - Reproduced the MINJA query-only memory injection workflow for an LLM agent.
@@ -52,14 +38,11 @@ Install QA dependencies as needed:
 pip install openai numpy python-Levenshtein
 ```
 
-Create API-key files locally only. Do not commit these files:
+Create API-key files locally only.
 
 ```text
 QA/OpenAI_api_key.txt
-rap/OpenAI_api_key.txt
-rap/OpenRouter_api_key.txt
 rap/NVIDIA_api_key.txt
-rap/Grok_api_key.txt
 ```
 
 Only create the key file required by the provider you are running.
@@ -122,40 +105,9 @@ Run the notebook cells in order. The notebook contains:
 
 The guardrail is applied immediately before `memory.store()`. If the generated answer/thought matches suspicious reversal patterns, the memory is blocked instead of being saved.
 
-## Notes Before Pushing
-
-Before pushing to GitHub, check what Git will include:
-
-```bash
-git status --short
-git add --dry-run .
-```
-
-Make sure these do not appear in the staged files:
-
-```text
-WebShop/
-*api_key*.txt
-.env
-log/
-logs/
-output/
-memory.json
-```
-
+ 
 ## Research Paper Reference
 
 This implementation follows the MINJA paper idea: query-only attacks can poison an agent's memory by making malicious interactions look like normal successful examples. Later, when the agent retrieves similar memories, the poisoned records influence its reasoning or final action.
 
 My added part focuses on a simple defense direction: inspect each candidate memory before storage and reject suspicious records. This does not remove the original attack implementation; it adds an experiment path for comparing behavior with and without the guardrail.
-
-## Citation
-
-```bibtex
-@inproceedings{dong2025memory,
-  title={Memory Injection Attacks on LLM Agents via Query-Only Interaction},
-  author={Dong, Shen and Xu, Shaochen and He, Pengfei and Li, Yige and Tang, Jiliang and Liu, Tianming and Liu, Hui and Xiang, Zhen},
-  booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},
-  year={2025}
-}
-```
