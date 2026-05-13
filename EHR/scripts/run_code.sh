@@ -1,1 +1,0 @@
-python main.py --llm XXX --dataset mimic_iii --data_path XXX --logs_path XXX --num_questions -1 --seed 0

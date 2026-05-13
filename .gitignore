@@ -160,13 +160,41 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+.vscode/
+rap/.vscode/
 
 # MINJA project-specific
 rap/OpenAI_api_key.txt
+rap/OpenRouter_api_key.txt
+rap/NVIDIA_api_key.txt
+rap/Grok_api_key.txt
+QA/OpenAI_api_key.txt
+.env
+.env.*
+!.env.example
+*.key
+*api_key*.txt
+*API_key*.txt
+*secret*.txt
+logs/
+log/
+output/
+outputs/
+results/
+memory.json
+memory_test.json
+test.json
+question_*.json
+templates_*.json
+inject_qustions.json
 rap/log/
 rap/output/
 rap/prompts/__pycache__/
 rap/**/__pycache__/
+
+# External environment code and datasets kept out of this repo
+WebShop/
+webshop/
 
 # WebShop artifacts (generated)
 rap/webshop/user_session_logs/
